@@ -1,0 +1,73 @@
+================================================================================
+    SHORT EXPLANATION: ALGORITHM LOGIC AND STATE SPACE TREE VISUALIZATION
+          Sum of Subsets Problem Using Backtracking (Target Sum = 15)
+================================================================================
+
+1. SHORT EXPLANATION OF ALGORITHM LOGIC
+--------------------------------------------------------------------------------
+The algorithm solves the Sum of Subsets problem using Depth-First Search with 
+Backtracking:
+
+- Input: Set S = {5, 10, 12}, Target Sum M = 15.
+- Decision Process:
+  The algorithm builds subsets element by element. At each step, it explores 
+  two binary choices for the current element:
+    1. Include the element: Add it to the subset and add its value to currentSum.
+    2. Exclude the element: Skip the element and keep currentSum unchanged.
+
+- Target Match:
+  When currentSum == 15, the subset is recorded as a valid solution ({5, 10}).
+
+- Pruning (Bounding Condition):
+  Since all numbers in the set are positive, if currentSum > 15, adding further 
+  numbers will only increase the sum. Thus, that entire branch is pruned 
+  immediately (abandoned), saving time.
+
+- Backtracking Step:
+  When a branch hits a dead end or reaches a target match, the algorithm undoes 
+  the last inclusion (pops the element) and explores alternative branches.
+
+
+2. SHORT EXPLANATION OF THE VISUALIZATION (STATE SPACE TREE)
+--------------------------------------------------------------------------------
+The state space tree (Visualization.png) visually maps every decision path from 
+top to bottom:
+
+- Level 0 (Root Node):
+  Represents the initial empty state: subset {}, sum = 0.
+
+- Level 1 (Element 5):
+  Branches into "Include 5" (subset {5}, sum = 5) and "Exclude 5" (subset {}, sum = 0).
+
+- Level 2 (Element 10):
+  From {5}, choosing "Include 10" gives {5, 10} with sum = 15.
+  This node matches the target sum and is highlighted in GREEN.
+
+- Level 3 (Element 12):
+  Exhausts all 8 (2^3) possible combinations:
+  - GREEN Highlight:
+    Node {5, 10} (Sum = 15) -> The ONLY valid subset solution (5 + 10 = 15).
+  - RED Indicators (Pruned Branches):
+    Nodes {5, 10, 12} (Sum = 27), {5, 12} (Sum = 17), and {10, 12} (Sum = 22).
+    These branches exceed 15 and are pruned immediately.
+  - NEUTRAL / GRAY Indicators (Unsuccessful Leaves):
+    Nodes {5} (Sum = 5), {10} (Sum = 10), {12} (Sum = 12), and {} (Sum = 0).
+    These combinations reach the end of the set with a sum strictly less than 15.
+
+- Directional Arrows & Labels:
+  Show the recursive progression with clear "Include" and "Exclude" edge labels.
+
+
+3. KEY LAB VIVA POINTS
+--------------------------------------------------------------------------------
+Q: Why is {12} not a valid solution?
+A: Because its sum is 12, which is not equal to the target sum 15.
+
+Q: Why are branches exceeding 15 pruned?
+A: All elements in the set are positive integers. Once a branch exceeds 15, 
+   adding any further element will only make the sum larger. It is impossible 
+   to reach 15, so pruning avoids useless computations.
+
+Q: What is the total number of solutions found?
+A: Exactly 1 valid solution: {5, 10} where 5 + 10 = 15.
+================================================================================
