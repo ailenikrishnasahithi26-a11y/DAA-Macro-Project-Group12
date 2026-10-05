@@ -1,0 +1,58 @@
+PROMPT USED TO GENERATE THE FLOWCHART
+======================================
+
+Create a professional flowchart for the Greedy Job Sequencing with Deadlines
+and Profits algorithm using standard flowchart symbols. The flowchart must
+include the following steps in order:
+
+1.  START  (Rounded rectangle / terminal symbol)
+
+2.  INPUT: Accept a list of jobs, where each job has a Job ID, a Deadline,
+    and a Profit.  (Parallelogram / input-output symbol)
+
+3.  PROCESS: Sort all jobs in descending order of profit.
+    (Rectangle / process symbol)
+
+4.  PROCESS: Calculate the maximum deadline among all jobs.
+    (Rectangle / process symbol)
+
+5.  PROCESS: Initialize an array of time slots (size = maximum deadline),
+    all initially set to empty.  (Rectangle / process symbol)
+
+6.  DECISION: Are there more jobs to process?
+    (Diamond / decision symbol)
+    - Label the "Yes" branch → continue to step 7.
+    - Label the "No"  branch → go to step 11.
+
+7.  PROCESS: Select the next job from the sorted list (highest remaining
+    profit first).  (Rectangle / process symbol)
+
+8.  DECISION: Is there an available (empty) time slot on or before
+    this job's deadline?  (Diamond / decision symbol)
+    - Label the "Yes" branch → go to step 9.
+    - Label the "No"  branch → go to step 10.
+
+9.  PROCESS: Schedule the job in the latest available slot on or before
+    its deadline.  (Rectangle / process symbol)
+    Then loop back to step 6.
+
+10. PROCESS: Reject the job (no valid slot available).
+    (Rectangle / process symbol)
+    Then loop back to step 6.
+
+11. OUTPUT: Display the final job schedule (list of scheduled jobs),
+    the list of rejected jobs, and the maximum total profit.
+    (Parallelogram / input-output symbol)
+
+12. END  (Rounded rectangle / terminal symbol)
+
+Additional requirements:
+- Use directional arrows to show the flow between all steps.
+- Clearly label every decision branch with "Yes" and "No".
+- Use standard flowchart shapes: rounded rectangles for Start/End,
+  rectangles for processes, parallelograms for input/output, and
+  diamonds for decisions.
+- Ensure all text is readable, with sufficient font size.
+- The diagram should not be cropped; include adequate margins.
+- Use a clean, professional color scheme suitable for academic work.
+- Export the flowchart as a PNG image named "Visualization.png".
