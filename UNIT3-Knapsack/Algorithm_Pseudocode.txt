@@ -1,0 +1,94 @@
+================================================================================
+ALGORITHM SPECIFICATION: 0/1 KNAPSACK DYNAMIC PROGRAMMING
+================================================================================
+
+1. PROBLEM FORMULATION
+--------------------------------------------------------------------------------
+Given:
+  - A set of n discrete items: S = {Item_1, Item_2, ..., Item_n}
+  - Each item i has an associated integer weight w[i] and profit p[i]
+  - A knapsack of maximum integer weight capacity W
+
+Objective:
+  Maximize:
+      Total Profit = SUM(p[i] * x[i]) for i = 1 to n
+  Subject to:
+      Total Weight = SUM(w[i] * x[i]) <= W
+      where decision variable x[i] in {0, 1}
+
+Recurrence Relation:
+  For table dp[i][w] representing maximum profit using first i items with limit w:
+  
+  dp[i][w] = 0                                            if i = 0 or w = 0
+  dp[i][w] = dp[i-1][w]                                   if w[i-1] > w
+  dp[i][w] = max(dp[i-1][w], p[i-1] + dp[i-1][w-w[i-1]])  if w[i-1] <= w
+
+
+2. PSEUDOCODE: DP TABLE CONSTRUCTION
+--------------------------------------------------------------------------------
+Algorithm KnapsackDP(weights[], profits[], n, W):
+  Input : Integer arrays weights[0..n-1], profits[0..n-1], integer n, integer W
+  Output: 2D table dp[0..n][0..W] containing subproblem solutions
+
+  // Step 1: Matrix Allocation
+  Allocate 2D array dp of dimension (n + 1) x (W + 1)
+
+  // Step 2: Base Case Initialization
+  For w <- 0 To W Do:
+      dp[0][w] <- 0
+  EndFor
+  For i <- 0 To n Do:
+      dp[i][0] <- 0
+  EndFor
+
+  // Step 3: Bottom-up Dynamic Programming Table Fill
+  For i <- 1 To n Do:
+      currentWeight <- weights[i - 1]
+      currentProfit <- profits[i - 1]
+      
+      For w <- 0 To W Do:
+          If currentWeight <= w Then
+              // Choice between excluding item i or including item i
+              dp[i][w] <- Max(dp[i - 1][w], currentProfit + dp[i - 1][w - currentWeight])
+          Else
+              // Item i exceeds available sub-capacity w
+              dp[i][w] <- dp[i - 1][w]
+          EndIf
+      EndFor
+  EndFor
+
+  Return dp
+
+
+3. PSEUDOCODE: OPTIMAL SUBSET BACKTRACKING
+--------------------------------------------------------------------------------
+Algorithm FindOptimalSubset(dp, weights[], profits[], n, W):
+  Input : Constructed DP table dp, weights[], profits[], n, W
+  Output: List of selected items
+
+  Initialize empty list selectedItems
+  remainingCapacity <- W
+
+  For i <- n DownTo 1 Do:
+      // If profit changed from row above, item i was selected
+      If dp[i][remainingCapacity] != dp[i - 1][remainingCapacity] Then
+          Append item i to selectedItems
+          remainingCapacity <- remainingCapacity - weights[i - 1]
+      EndIf
+  EndFor
+
+  Reverse selectedItems
+  Return selectedItems
+
+
+4. COMPLEXITY ANALYSIS
+--------------------------------------------------------------------------------
+Time Complexity:
+  - Table construction requires two nested loops: outer runs n times, inner runs (W + 1) times.
+  - Backtracking takes O(n) steps.
+  - Overall Time Complexity: O(n * W)  (Pseudo-polynomial time)
+
+Space Complexity:
+  - The DP table requires an (n + 1) x (W + 1) matrix of integers.
+  - Overall Space Complexity: O(n * W)
+================================================================================

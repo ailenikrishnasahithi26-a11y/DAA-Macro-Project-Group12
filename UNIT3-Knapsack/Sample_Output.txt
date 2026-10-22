@@ -1,0 +1,38 @@
+=================================================================
+        0/1 KNAPSACK PROBLEM - DYNAMIC PROGRAMMING APPROACH       
+=================================================================
+Knapsack Maximum Capacity (W) : 10
+Total Available Items (n)     : 4
+
+Item Set Details:
+--------------------------------------------------
+Item ID    Weight (kg)     Profit ($)     
+--------------------------------------------------
+Item 1     1               10             
+Item 2     2               20             
+Item 3     4               35             
+Item 4     5               45             
+--------------------------------------------------
+
+Dynamic Programming Table (Rows: Items 0 to 4 | Columns: Capacity 0 to 10):
+Cap ->     0    1    2    3    4    5    6    7    8    9   10
+--------------------------------------------------------------
+Item 0|    0    0    0    0    0    0    0    0    0    0    0
+Item 1|    0   10   10   10   10   10   10   10   10   10   10
+Item 2|    0   10   20   30   30   30   30   30   30   30   30
+Item 3|    0   10   20   30   35   45   55   65   65   65   65
+Item 4|    0   10   20   30   35   45   55   65   75   80   90
+--------------------------------------------------------------
+
+Optimal Solution Summary:
+--------------------------------------------------
+Maximum Profit Achieved : 90
+Optimal Items Selected  :
+  * Item 1 (Weight: 1, Profit: 10)
+  * Item 3 (Weight: 4, Profit: 35)
+  * Item 4 (Weight: 5, Profit: 45)
+--------------------------------------------------
+Total Knapsack Weight   : 10 / 10 capacity
+Total Solution Profit   : 90
+Capacity Constraint Met : YES (Valid)
+=================================================================
