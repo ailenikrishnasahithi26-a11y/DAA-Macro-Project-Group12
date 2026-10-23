@@ -1,0 +1,17 @@
+Draw a search tree showing bounding and pruning for TSP with 4 cities using Branch and Bound.
+
+Use the following cost matrix:
+         City0  City1  City2  City3
+City0  [  INF,    10,     8,     9 ]
+City1  [   10,   INF,     5,     7 ]
+City2  [    8,     5,   INF,     6 ]
+City3  [    9,     7,     6,   INF ]
+
+Show the following in the tree:
+- Each node labeled with the current path and its lower bound cost.
+- Pruned branches clearly marked in red with the reason "Bound >= Best".
+- The optimal path highlighted in green.
+- Root node at the top starting from City 0.
+- Node levels representing the number of cities visited.
+
+The visualization should be clean, academic, and suitable for a DAA project submission.

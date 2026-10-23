@@ -1,0 +1,34 @@
+ALGORITHM: TRAVELING SALESPERSON PROBLEM (TSP) USING BRANCH AND BOUND
+
+Input:
+    n cities
+    cost[i][j] = travel cost from city i to city j (INF if no direct path)
+
+Output:
+    Minimum tour cost
+    Optimal path visiting all cities exactly once and returning to start
+
+1. Compute an initial lower bound using row and column reduction of the cost matrix.
+2. Create the root node for city 0 with the reduced matrix and initial bound.
+3. Push the root node into a priority queue (min-heap by bound).
+4. While the priority queue is not empty:
+       a. Pop the node with the minimum bound.
+       b. If all cities are visited (level == n-1):
+              Update the final minimum cost and path.
+              Continue.
+       c. For each unvisited city j:
+              i.  Create a child node for the path extended to city j.
+              ii. Compute the new reduced matrix:
+                  - Set row[current] and col[j] to INF.
+                  - Set cost[j][0] to INF (prevent premature return).
+                  - Reduce the new matrix and compute its bound:
+                    bound = parent_bound + cost[current][j] + reduction_cost
+              iii. If bound < current minimum cost:
+                       Push child node into the priority queue.
+              iv.  Else prune this branch.
+5. Return the minimum cost and the optimal path.
+
+Reduction Step:
+    For each row: subtract the minimum value from all elements.
+    For each column: subtract the minimum value from all elements.
+    Reduction cost = sum of all subtracted values.
