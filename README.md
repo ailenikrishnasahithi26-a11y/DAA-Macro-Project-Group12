@@ -15,6 +15,7 @@ This repository is organized into dedicated topic branches, where each branch re
 | [`UNIT2_Greedy_Job_Sequencing_Flowchart`](https://github.com/ailenikrishnasahithi26-a11y/DAA-Macro-Project-Group12/tree/UNIT2_Greedy_Job_Sequencing_Flowchart) | **Unit 2: Greedy Job Sequencing** | Greedy Paradigm | Python | Job sequencing script, decision flowchart & summary deck |
 | [`UNIT3-Knapsack`](https://github.com/ailenikrishnasahithi26-a11y/DAA-Macro-Project-Group12/tree/UNIT3-Knapsack) | **Unit 3: 0/1 Knapsack** | Dynamic Programming (DP) | Java | DP table implementation, pseudocode & execution output |
 | [`UNIT4-subset`](https://github.com/ailenikrishnasahithi26-a11y/DAA-Macro-Project-Group12/tree/UNIT4-subset) | **Unit 4: Sum of Subsets** | Backtracking | Java | Recursive backtracking code, pruning state space tree |
+| [`UNIT5-branch`](https://github.com/ailenikrishnasahithi26-a11y/DAA-Macro-Project-Group12/tree/UNIT5-branch) | **Unit 5: Traveling Salesperson Problem (TSP)** | Branch and Bound (LCBB / Min-Heap) | Python | Search tree script, matrix reduction pseudocode, sample trace, PDF report & tree visualization |
 | [`ppt`](https://github.com/ailenikrishnasahithi26-a11y/DAA-Macro-Project-Group12/tree/ppt) | **Comprehensive Presentation** | Multi-Unit Presentation Deck | PowerPoint (.pptx) | Complete 36-slide Group 12 Master Presentation |
 
 ---
@@ -85,7 +86,33 @@ This repository is organized into dedicated topic branches, where each branch re
 
 ---
 
-### 5. `ppt` — Master Macro Project Presentation
+### 5. `UNIT5-branch` — Traveling Salesperson Problem (Branch and Bound)
+- **Focus**: Solving the Traveling Salesperson Problem (TSP) to determine the minimum-cost Hamiltonian cycle visiting every city exactly once and returning to the starting city using Least Cost Branch and Bound (LCBB).
+- **Core Concepts**:
+  - **Branch and Bound State Space Search**: Formulating the TSP search space as a state space tree where each node represents a partial tour starting from City 0. Exploration order is governed by a min-heap priority queue keyed on lower bound.
+  - **Matrix Reduction & Lower Bounding**:
+    - Computing a valid lower bound via row and column reduction of the cost matrix:
+      \[
+      \text{Reduction Cost} = \sum_{i=1}^n \min(\text{row}_i) + \sum_{j=1}^n \min(\text{col}_j)
+      \]
+    - For transition from city \( i \) to city \( j \):
+      \[
+      \hat{c}(\text{child}) = \hat{c}(\text{parent}) + \text{cost}[i][j] + r
+      \]
+      where row \( i \) and column \( j \) are eliminated (set to \( \infty \)), and back-edge \( (j, 0) \) is set to \( \infty \) to prevent premature cycle formation.
+  - **Bounding Function & Pruning**: Tracking the current best upper bound (cost of complete tour). Any sub-tree whose lower bound is greater than or equal to the best solution (\( \text{Bound} \ge \text{Best} \)) is immediately pruned, eliminating redundant exponential search branches.
+- **Files in Branch**:
+  - `Project14_TSP_BnB.py`: Complete Python script implementing min-heap priority queue, dynamic matrix reduction, terminal trace, and network search tree generation.
+  - `Algorithm_Pseudocode.txt`: Step-by-step algorithm pseudocode, matrix reduction logic, and lower bounding steps.
+  - `Sample_Output.txt`: Complete execution log displaying node exploration order, dynamic bounds, pruned branches, and optimal tour (`City0 -> City3 -> City1 -> City2 -> City0`, Min Cost: 29).
+  - `Prompt.txt`: Engineering visualization prompt detailing node labeling, color-coded pruning, and optimal path styling.
+  - `README.md`: Unit-level problem definition, input cost matrix, algorithm explanation, worst-case complexity (\( O(n^2 \cdot 2^n) \)), and key learning outcomes.
+  - `TSP_BnB.pdf`: Formal academic project documentation and report covering TSP Branch and Bound analysis.
+  - `Visualization.png`: High-resolution state space search tree highlighting node bounds, pruned branches (red), and the optimal Hamiltonian cycle (green).
+
+---
+
+### 6. `ppt` — Master Macro Project Presentation
 - **Focus**: Consolidated final project presentation for **Group 12**.
 - **File**: `Group12_DAA_Macro_Project.pptx` (16:9 Widescreen, 36 Slides)
 - **Slide Architecture**:
@@ -116,6 +143,7 @@ git checkout UNIT1-Asymptotic
 git checkout UNIT2_Greedy_Job_Sequencing_Flowchart
 git checkout UNIT3-Knapsack
 git checkout UNIT4-subset
+git checkout UNIT5-branch
 git checkout ppt
 ```
 
@@ -123,6 +151,6 @@ git checkout ppt
 
 ## Technologies & Tools Used
 - **Languages**: Python 3.13, Java 21+
-- **Libraries**: Pillow (PIL), `python-pptx`
+- **Libraries**: Pillow (PIL), `python-pptx`, Matplotlib, NetworkX
 - **Visualization**: Prompt-engineered infographics, coordinate growth plots, and state space trees
 - **Version Control**: Git & GitHub
